@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fuckyou
+  namespace: fuckyou
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "9090"
+spec:
+  selector:
+    matchLabels:
+      app: fuckyou
+  template:
+    metadata:
+      labels:
+        app: fuckyou
+    spec:
+      containers:
+        - image: public.ecr.aws/t2g4b5g9/fuckyou-poc
+          name: fuckyou
+          imagePullPolicy: Always
